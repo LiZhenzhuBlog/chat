@@ -1,20 +1,123 @@
 <!DOCTYPE html>
-<html> 
-<head> 
-	<title>旋转木马动画</title> 
+<html>
+<head>
+	<title  >Chat with lzz AI Bot</title>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/peerjs@1.4.7/dist/peerjs.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <div class="logoing" id='logonong' > 李珍珠 </div>
+ <style>
+ .ttt{
+    	text-align: center;
+    }
+
+ .logoing {
+    	display: flex;
+  		justify-content: center; /* 将子元素水平居中 */
+  		align-items: center; /* 将子元素垂直居中 */
+    	text-align: center;
+    	position: fixed;
+  		top: 10px;
+  		left:  10px;
+      	border: 6px solid #f3f3f3;
+      	border-top: 6px solid #3498db;
+      	border-radius: 50%;
+      	width: 70px;
+      	height: 70px;
+      	animation: spin 2s linear infinite;
+      	
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+</style>
 
 
-</head> 
+</head>
+<body>
+	<h1 class="ttt">Chat with AI Bot</h1>
+	<div id="chatbox"></div>
+	<input type="text" id="userinput" style="width: 95%; height: 50px;">
+	<button onclick="sendMessage()">Send</button>
 
-<body> 
+	
+	 
 
 
-<iframe
-	src="https://ysharma-chatglm-6b-gradio-streaming.hf.space"
-	frameborder="10"
-	width=100%;
-	height=600;
-></iframe>
 
-</body> 
+	<!-- 消息对话框 -->
+    </div>
+
+	<script>
+		// 显示动画元素
+
+		//document.getElementById('chatbox').innerHTML = marked.parse('# Marked in browser\n\nRendered by **marked**.');
+		var peer = new Peer(); // 创建一个新的Peer对象'lizhenzhu1send'
+		var conn; // 保存连接对象
+		var userInput = document.getElementById('userinput');
+		var sendID=null
+
+		// 当peer对象打开时，输出其ID
+		peer.on('open', function(id) {
+
+			sendID=id
+			//console.log('My peer ID is: ' + id);
+			// 弹出对话框，显示本地和远程Peer对象的ID
+			//alert("Local peer ID: " + peer.id + "\nRemote peer ID: lizhenzhu1received");
+			alert('欢迎使用！该模型基于Chatglm开源项目构建，该项目得到宁波市第二医院华美基金课题支持，特此感谢！')
+			conn = peer.connect('lizhenzhu1received'); // 连接到指定的Peer
+
+
+			// 监听连接对象的data事件，即收到消息时触发
+			conn.on('data', function(data) {
+				
+				console.log('收到: ' + data)
+				var botMessage = data.message;
+				//$("#chatbox").append("<p>Bot: " + botMessage + "</p>");
+				 // 使用marked.js将Markdown格式转换为HTML格式
+			    htmlOutput = marked.parse(botMessage);
+
+			    $("#chatbox").append("<p># 李珍珠@机器人: " + htmlOutput + "</p>");
+			    window.scrollTo(0, document.body.scrollHeight);
+
+
+			    // 将HTML格式的文本插入到展示Markdown的div中
+			    //document.getElementById('markdown-output').innerHTML = htmlOutput;
+			});
+		});
+
+		peer.on('error', function (err) {
+                        console.log(err);
+                        alert('链接失败，刷新网页链接！错误代码：' + err);
+                        peer=null
+                    });
+
+		peer.on('disconnected', function () {
+                        console.log('Connection lost. Please reconnect');
+                        // Workaround for peer.reconnect deleting previous id
+                        peer.id = sendID;
+                        peer._lastServerId = sendID;
+                        peer.reconnect();
+                    });
+
+		function sendMessage() {
+			var userMessage0 = $("#userinput").val();
+			//userMessage = marked.parse(userMessage0);
+
+			$("#chatbox").append(`<p style='text-align: right' ># You: <br> ${userMessage0}</p>`);
+
+			window.scrollTo(0, document.body.scrollHeight);
+
+			// 发送消息给连接对象
+			conn.send({message: userMessage0});
+			userInput.value = '';
+			
+			
+		}
+	</script>
+</body>
 </html>
