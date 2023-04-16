@@ -14,8 +14,8 @@
 
  .logoing {
     	display: flex;
-  		justify-content: center; /* 将子元素水平居中 */
-  		align-items: center; /* 将子元素垂直居中 */
+  		justify-content: center; 
+  		align-items: center; 
     	text-align: center;
     	position: fixed;
   		top: 10px;
@@ -60,37 +60,28 @@ var _hmt = _hmt || [];
 		// 显示动画元素
 
 		//document.getElementById('chatbox').innerHTML = marked.parse('# Marked in browser\n\nRendered by **marked**.');
-		var peer = new Peer(); // 创建一个新的Peer对象'lizhenzhu1send'
-		var conn; // 保存连接对象
+		var peer = new Peer(); 
+		var conn; 
 		var userInput = document.getElementById('userinput');
 		var sendID=null
 
-		// 当peer对象打开时，输出其ID
+	
 		peer.on('open', function(id) {
 
 			sendID=id
-			//console.log('My peer ID is: ' + id);
-			// 弹出对话框，显示本地和远程Peer对象的ID
-			//alert("Local peer ID: " + peer.id + "\nRemote peer ID: lizhenzhu1received");
+	
 			alert('欢迎使用！该模型基于Chatglm开源项目构建，该项目得到宁波市第二医院华美基金课题支持，特此感谢！')
-			conn = peer.connect('lizhenzhu1received'); // 连接到指定的Peer
+			conn = peer.connect('lizhenzhu1received'); 
 
-
-			// 监听连接对象的data事件，即收到消息时触发
 			conn.on('data', function(data) {
 				
 				console.log('收到: ' + data)
 				var botMessage = data.message;
-				//$("#chatbox").append("<p>Bot: " + botMessage + "</p>");
-				 // 使用marked.js将Markdown格式转换为HTML格式
 			    htmlOutput = marked.parse(botMessage);
 
 			    $("#chatbox").append("<p># 李珍珠@机器人: " + htmlOutput + "</p>");
 			    window.scrollTo(0, document.body.scrollHeight);
 
-
-			    // 将HTML格式的文本插入到展示Markdown的div中
-			    //document.getElementById('markdown-output').innerHTML = htmlOutput;
 			});
 		});
 
@@ -116,7 +107,6 @@ var _hmt = _hmt || [];
 
 			window.scrollTo(0, document.body.scrollHeight);
 
-			// 发送消息给连接对象
 			conn.send({message: userMessage0,
 						idX:sendID
 
