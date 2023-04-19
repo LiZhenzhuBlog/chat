@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <div class="logoing" id='logonong' > 李珍珠 </div>
  <style>
+		body {
+			background-color: white;
+			color: black; 
+		}
+		body.purple {
+			background-color: purple;
+			color: white; 
+		}
+
  .ttt{
     	text-align: center;
     }
@@ -50,15 +60,25 @@ var _hmt = _hmt || [];
 <body>
 	<h1 class="ttt">Chat with AI Bot</h1>
 	<div id="chatbox"></div>
+	<button onclick="toggleBackgroundColor()">【静心】模式</button>
 	<input type="text" id="userinput" style="width: 95%; height: 50px;">
 	<button onclick="sendMessage()">Send</button>
+
 
 	<!-- 消息对话框 -->
     </div>
 
 	<script>
-		// 显示动画元素
+		var jingxin= false
+		function toggleBackgroundColor() {
+			var body = document.querySelector("body");
+			body.classList.toggle("purple");
+			if (jingxin){jingxin=false}
+			else{jingxin=true};
+			 
 
+			console.log('jingxin:'+jingxin);
+			}
 		//document.getElementById('chatbox').innerHTML = marked.parse('# Marked in browser\n\nRendered by **marked**.');
 		var peer = new Peer(); 
 		var conn; 
@@ -108,7 +128,8 @@ var _hmt = _hmt || [];
 			window.scrollTo(0, document.body.scrollHeight);
 
 			conn.send({message: userMessage0,
-						idX:sendID
+						idX:sendID,
+						jinx:jingxin,
 
 						});
 			userInput.value = '';
