@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title  >Chat with lzz AI Bot</title>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/peerjs@1.4.7/dist/peerjs.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <div class="logoing" id='logonong' > 李珍珠 </div>
+ <style>
+		body {
+			background-color: white;
+			color: black; 
+		}
+		body.purple {
+			background-color: purple;
+			color: white; 
+		}
+		body.red {
+			background-color: red;
+			color: yellow; 
+		}
+
+ .ttt{
+    	text-align: center;
+    }
+
+ .logoing {
+    	display: flex;
+  		justify-content: center; 
+  		align-items: center; 
+    	text-align: center;
+    	position: fixed;
+  		top: 10px;
+  		left:  10px;
+      	border: 6px solid #f3f3f3;
+      	border-top: 6px solid #3498db;
+      	border-radius: 50%;
+      	width: 70px;
+      	height: 70px;
+      	animation: spin 2s linear infinite;
+      	
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+</style>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c3adbc8cf0116f98ae76b9fdb69407aa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+<body>
+	<h1 class="ttt">Chat with AI Bot</h1>
+	<div id="chatbox"></div>
+	<button onclick="toggleBackgroundColor()">【静心】模式</button>
+	<button onclick="toggleBackredColor()">【尽力】模式</button>
+	<input type="text" id="userinput" style="width: 95%; height: 50px;">
+	<button onclick="sendMessage()">Send</button>
+
+
+	<!-- 消息对话框 -->
+    </div>
+
+	<script>
+		var jingxin= false
+		var pubmed= false
+		function toggleBackgroundColor() {
+			var body = document.querySelector("body");
+			body.classList.toggle("purple");
+			if (jingxin){jingxin=false}
+			else{jingxin=true};
+			 
+
+			console.log('jingxin:'+jingxin);
+			}
+		function toggleBackredColor() {
+			var body = document.querySelector("body");
+			body.classList.toggle("red");
+			jingxin= false
+			if (pubmed){pubmed=false}
+			else{pubmed=true};
+			console.log('pubmed:'+pubmed);
+			}
+		//document.getElementById('chatbox').innerHTML = marked.parse('# Marked in browser\n\nRendered by **marked**.');
+		var peer = new Peer(); 
+		var conn; 
+		var userInput = document.getElementById('userinput');
+		var sendID=null
+
+	
+		peer.on('open', function(id) {
+
+			sendID=id
+	
+			alert('欢迎使用！该模型基于Chatglm开源项目构建，该项目得到宁波市第二医院华美基金课题支持，特此感谢！')
+			conn = peer.connect('lizhenzhu1received'); 
+
+			conn.on('data', function(data) {
+				
+				console.log('收到: ' + data)
+				var botMessage = data.message;
+			    htmlOutput = marked.parse(botMessage);
+
+			    $("#chatbox").append("<p># 李珍珠@机器人: " + htmlOutput + "</p>");
+			    window.scrollTo(0, document.body.scrollHeight);
+
+			});
+		});
+
+		peer.on('error', function (err) {
+                        console.log(err);
+                        alert('链接失败，刷新网页链接！错误代码：' + err);
+                        peer=null
+                    });
+
+		peer.on('disconnected', function () {
+                        console.log('Connection lost. Please reconnect');
+                        // Workaround for peer.reconnect deleting previous id
+                        peer.id = sendID;
+                        peer._lastServerId = sendID;
+                        peer.reconnect();
+                    });
+
+		function sendMessage() {
+			var userMessage0 = $("#userinput").val();
+			//userMessage = marked.parse(userMessage0);
+
+			$("#chatbox").append(`<p style='text-align: right' ># You: <br> ${userMessage0}</p>`);
+
+			window.scrollTo(0, document.body.scrollHeight);
+
+			conn.send({message: userMessage0,
+						idX:sendID,
+						jinx:jingxin,
+						pubmedx:pubmed
+
+						});
+			userInput.value = '';
+			
+			
+		}
+	</script>
+</body>
+</html>
