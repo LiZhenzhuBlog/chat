@@ -207,9 +207,10 @@ var _hmt = _hmt || [];
 						 
 						} catch (err) {
 						    console.log('JSON字符串解析出错:', err.message);
-						}
-					
-				}
+						    htmlOutput = marked.parse(err.message);
+
+			    			$("#chatbox").append("<p># 李珍珠@机器人: " + htmlOutput + "</p>");
+							}
 				else{
 				htmlOutput = marked.parse(botMessage);
 
