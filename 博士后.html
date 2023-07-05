@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Markmap 流程图示例</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<style>
+  		svg.markmap {
+    	width: 100%;
+    	height: 100vh;
+  	}
+	</style>
+
+  <!-- 加载 Markmap 和必要的样式表 -->
+  <link rel="stylesheet" href="∧">
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.4"></script>
+
+</head>
+<body>
+  <div class="markmap">
+    # 基于深度学习联合VTK形态学分析的脑出血软件系统研究
+    - （A）算法——深度学习
+      - 大脑分割
+      - 血肿分割
+      - 收据收集
+      - 数据标注
+      - 深度学习
+      - 算法评估
+    - （B）算法——VTK形态学分析
+      - 大脑  volume+mask
+        - 体积
+        - 质心
+      - 血肿  volume+mask
+        - 体积 
+        - 质心
+        - 血肿到大脑的距离分析
+        - 血肿的密度分析
+        - 血肿/大脑体积比
+    - （C）软件系统开发
+        - 代码开发
+        - 系统调试
+        - 平台发布和测试
+        - 软著申请
+    - （D）应用——基于深度学习+脑图谱的脑出血精准定位诊断和报告
+        - 大脑的mask+血肿mask （A）
+          - 已经公认的知道的脑图谱 volume
+          - 基于三维矩阵的布尔运算分析
+          - 报告脑出血受累的位置
+        - 利用vtk形态学分析（B）
+          - 报告血肿的形态，体积等参数
+          - 三维可视化报告
+    - （E）论文发表和专利申报
+    - （F）课题申报
+  </div>
+</body>
+</html>
