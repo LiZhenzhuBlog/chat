@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>李珍珠</title>
+    <div class="namemy">
+
+    <h3>by:李珍珠</h3>
+    <hr>
+	</div>
+    
+    <style>
+      svg.markmap {
+        width: 100%;
+        height: 90vh;
+      }
+  .image {
+        display: flex; /* 使用Flexbox布局 */
+        height: 6vh;
+
+      flex-wrap: wrap;
+        justify-content: space-between; /* 自动平均分布元素 */
+    }
+   .namemy {
+        text-align: center;
+        height: 2vh;
+    }
+
+  .image-container {
+    width: 25%;; /* 设置图片容器的宽度 */
+    
+    position: relative; /* 设置相对定位以容纳图片和描述 */
+  }
+
+  .image-container img {
+    width: 99%; /* 设置图片的宽度为容器的宽度 */
+    height: 100%; /* 设置图片的高度为容器的高度 */
+    object-fit: cover; /* 根据需要调整图片的适应方式 */
+  }
+
+  .image-container figcaption {
+    position: absolute; /* 设置绝对定位以位于图片上方 */
+    top: 0; /* 调整描述文本的位置 */
+    width: 100%; /* 设置描述文本的宽度与容器一致 */
+    background-color: rgba(0, 0, 0, 0.8); /* 调整背景颜色和透明度的值以满足您的需求 */
+    color: white; /* 调整字体颜色以满足您的需求 */
+    text-align: center;}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.4"></script>
+  </head>
+  <body>
+    <div class="markmap">
+    <script type="text/template">
+	---
+	markmap:
+	  maxWidth: 1000
+	  initialExpandLevel: 1
+	---
+
+    # 标题：
+    ## 摘要：
+    - 本研究
+
+    ## 结果：
+    - 1、总体结果
+    		
+    - 2、按类别的结果 
+    		- 。
+    - 3、与其他模型的比较
+    		- 数。
+    - 4、 运行时间
+    		- 的。
+    - 5、典型失败案例 
+    		- 。
+    - 6、应用示例
+    		- 。
+    
+
+    ## 图片：
+    - 图6. 高分辨率模型和低分辨率模型在所有别上的结果（Dice分数和标准化表面距离[NSD分数]）（柱状图显示95%置信区间。置信区间非常紧密，以至于被点完全覆盖）。
+    - 
+
+    ## 结论：
+    - 正如我们所展示的，
+    ## 方法：
+    - 数据选择 
+    		- 我们收集了。
+    - 数据标注 
+    		- 根据临床经验，
+    - 模型
+    		- 。
+    - 评估
+    		- DICE和NSD分数评估
+    			- 然后在所有类别和受试者之间取平均值（微平均）。
+    		- 对比其他模型评估
+    			- 别。
+    ## 讨论：
+    
+    ## 简介：
+    - 不断增加用。
+    
+    ## GPT检索的未知知识
+    - Dic结果。
+
+      </script>
+	</div>
+
+
+<div class="image">
+	<div class="image-container">
+			<figcaption>图片描述</figcaption>
+			<img src="https://v2.img.360kuai.com/video/360_202_/t0113ee287463f4cdc3.jpg" alt="图片22描述">
+	</div>
+	<div class="image-container">
+			<figcaption>图片描述</figcaption>
+			<img src="https://v2.img.360kuai.com/video/360_202_/t0113ee287463f4cdc3.jpg" alt="图片22描述">
+	</div>
+
+
+</div>
+
+  </body>
+</html>
